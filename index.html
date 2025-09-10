@@ -1,0 +1,691 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Zwap Zone - Modern Clothing</title>
+    <!-- Tailwind CSS CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Google Font - Inter -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        body {
+            font-family: "Trirong", serif;
+            -webkit-font-smoothing: antialiased;
+            -moz-osx-font-smoothing: grayscale;
+        }
+        /* Custom scrollbar styles for the cart and wishlist */
+        .sidebar-items::-webkit-scrollbar {
+            width: 8px;
+        }
+        .sidebar-items::-webkit-scrollbar-thumb {
+            background-color: #cbd5e1; /* slate-300 */
+            border-radius: 4px;
+        }
+        .sidebar-items::-webkit-scrollbar-track {
+            background-color: #f1f5e9; /* slate-100 */
+        }
+    </style>
+</head>
+<body class="bg-gray-50 text-gray-800">
+
+    <!-- Header -->
+    <header class="bg-gray-900 sticky top-0 z-50  shadow-sm">
+        <nav class="container mx-auto px-4 py-4 flex items-center justify-between">
+            <a href="#" class="text-4xl font-bold tracking-tight text-white">
+                Zwap Zone
+            </a>
+            <div class="hidden md:flex items-center space-x-10 text-2rem font-medium">
+                <a href="#new-arrivals-section" class="nav-link text-gray-300 hover:text-white transition duration-300" data-category="new-arrivals">New Arrivals</a>
+                <a href="#men-section" class="nav-link text-gray-300 hover:text-white transition duration-300" data-category="men">Men</a>
+                <a href="#women-section" class="nav-link text-gray-300 hover:text-white transition duration-300" data-category="women">Women</a>
+                <a href="#kids-section" class="nav-link text-gray-300 hover:text-white transition duration-300" data-category="kids">Kids</a>
+                <a href="#about-us-section" class="nav-link text-gray-300 hover:text-white transition duration-300" data-category="none">About</a>
+            </div>
+            <div class="flex items-center space-x-4">
+                <button id="wishlist-button" class="relative p-2 rounded-full hover:bg-gray-700 transition duration-300 focus:outline-none">
+                    <!-- Wishlist SVG Icon -->
+                    <svg class="w-6 h-6 text-white" fill="currentColor" viewBox="0 0 24 24" stroke="none" xmlns="http://www.w3.org/2000/svg">
+                        <path d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5a5.5 5.5 0 015.5-5.5c1.74 0 3.41.81 4.5 2.09A5.5 5.5 0 0116.5 3c3.03 0 5.5 2.47 5.5 5.5 0 3.78-3.4 6.86-8.55 11.54L12 21.35z"/>
+                    </svg>
+                    <span id="wishlist-count" class="absolute top-0 right-0 inline-flex items-center justify-center px-2 py-1 text-xs font-bold leading-none text-red-100 bg-red-600 rounded-full transform translate-x-1/2 -translate-y-1/2">0</span>
+                </button>
+                <button id="cart-button" class="relative p-2 rounded-full hover:bg-gray-700 transition duration-300 focus:outline-none">
+                    <!-- Cart SVG Icon -->
+                    <svg class="w-6 h-6 text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M16 11V7a4 4 0 00-8 0v4M5 9h14l1 12H4L5 9z" />
+                    </svg>
+                    <span id="cart-count" class="absolute top-0 right-0 inline-flex items-center justify-center px-2 py-1 text-xs font-bold leading-none text-red-100 bg-red-600 rounded-full transform translate-x-1/2 -translate-y-1/2">0</span>
+                </button>
+                <div class="md:hidden">
+                    <button class="p-2 rounded-full hover:bg-gray-700 transition duration-300 focus:outline-none">
+                        <!-- Menu SVG Icon -->
+                        <svg class="w-6 h-6 text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16m-7 6h7" />
+                        </svg>
+                    </button>
+                </div>
+            </div>
+        </nav>
+    </header>
+
+    <!-- Main Content -->
+    <main class="container mx-auto px-4 py-12">
+        <!-- Hero Section -->
+        <section class="bg-gray-200 rounded-2xl overflow-hidden shadow-lg mb-12 relative flex items-center justify-center h-96 md:h-[500px] text-center">
+            <div class="absolute inset-0 bg-cover bg-center" style="background-image: url('Black\ and\ Neon\ Green\ Bold\ Sporty\ Outfit\ Banner.png');"></div>
+            <div class="relative z-10 p-6 md:p-12 bg-white bg-opacity-70 backdrop-blur-sm rounded-xl">
+                <h1 class="text-4xl md:text-6xl font-extrabold text-gray-900 mb-4 tracking-tight">Modern Apparel</h1>
+                <p class="text-base md:text-lg text-gray-700 max-w-xl mx-auto mb-6">Discover our exclusive collection of timeless pieces designed for the modern individual. Quality and elegance in every stitch.</p>
+                <!-- Shop Now button now links to the new arrivals section -->
+                <a href="#new-arrivals-section" class="inline-block bg-gray-900 text-white font-semibold py-3 px-8 rounded-full shadow-lg hover:bg-gray-700 transition duration-300 transform hover:scale-105">Shop Now</a>
+            </div>
+        </section>
+
+        <!-- New Arrivals Section -->
+        <section id="new-arrivals-section" class="product-section py-12">
+            <h2 class="text-3xl font-bold text-gray-900 mb-8 text-center">New Arrivals</h2>
+            <div id="new-arrivals-container" class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
+                <!-- Products will be injected here by JavaScript -->
+            </div>
+        </section>
+
+        <!-- Men's Section -->
+        <section id="men-section" class="product-section py-12 hidden">
+            <h2 class="text-3xl font-bold text-gray-900 mb-8 text-center">Men's Apparel</h2>
+            <div id="men-container" class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
+                <!-- Products will be injected here by JavaScript -->
+            </div>
+        </section>
+
+        <!-- Women's Section -->
+        <section id="women-section" class="product-section py-12 hidden">
+            <h2 class="text-3xl font-bold text-gray-900 mb-8 text-center">Women's Apparel</h2>
+            <div id="women-container" class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
+                <!-- Products will be injected here by JavaScript -->
+            </div>
+        </section>
+        
+        <!-- Kids' Section -->
+        <section id="kids-section" class="product-section py-12 hidden">
+            <h2 class="text-3xl font-bold text-gray-900 mb-8 text-center">Kids' Apparel</h2>
+            <div id="kids-container" class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
+                <!-- Products will be injected here by JavaScript -->
+            </div>
+        </section>
+
+        <!-- About Us Section -->
+        <section id="about-us-section" class="product-section py-12 hidden">
+            <h2 class="text-3xl font-bold text-gray-900 mb-8 text-center">About Us</h2>
+            <div class="bg-gray-100 p-8 rounded-xl text-center text-gray-600">
+                <p class="text-lg leading-relaxed max-w-3xl mx-auto">
+                    At Zwap Zone, we believe clothing is more than just fabric—it's a statement of personal style and a commitment to quality. Our mission is to craft modern apparel that blends timeless elegance with contemporary design. Each piece in our collection is thoughtfully designed and meticulously made to ensure a perfect fit, lasting durability, and effortless sophistication. We are dedicated to creating clothing that makes you feel confident and comfortable, allowing you to express your unique self with every thread. Thank you for joining us on this journey of style redefined.
+                </p>
+            </div>
+        </section>
+    </main>
+    
+    <!-- Product Detail Modal -->
+    <div id="product-modal" class="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center p-4 z-50 hidden transition-opacity duration-300 ease-in-out opacity-0">
+        <div class="bg-white rounded-xl shadow-2xl overflow-hidden w-full max-w-2xl transform transition-transform duration-300 scale-95">
+            <div class="flex flex-col md:flex-row md:items-center">
+                <div class="md:w-1/2">
+                    <img id="modal-product-image" src="" alt="Product Image" class="w-full h-80 object-cover">
+                </div>
+                <div class="md:w-1/2 p-6 flex flex-col justify-between">
+                    <div>
+                        <h2 id="modal-product-name" class="text-2xl font-bold text-gray-900 mb-2"></h2>
+                        <p id="modal-product-price" class="text-xl font-medium text-gray-600 mb-4"></p>
+                        <p id="modal-product-description" class="text-gray-700 mb-4"></p>
+                    </div>
+                    
+                    <!-- Size Selection Section -->
+                    <div class="mt-4">
+                        <h4 class="text-lg font-semibold mb-2">Select Size</h4>
+                        <div id="size-options-container" class="flex space-x-2">
+                             <!-- Size buttons will be added here by JS -->
+                        </div>
+                    </div>
+
+                    <div class="flex space-x-2 mt-4">
+                        <button id="modal-add-to-cart-btn" class="flex-1 bg-gray-900 text-white font-medium py-3 px-6 rounded-full hover:bg-gray-700 transition duration-300">
+                            Add to Cart
+                        </button>
+                        <button id="modal-add-to-wishlist-btn" class="flex-1 bg-gray-600 text-white font-medium py-3 px-6 rounded-full hover:bg-gray-700 transition duration-300">
+                            Add to Wishlist
+                        </button>
+                        <button id="close-modal-btn" class="p-4 rounded-full border border-gray-300 text-gray-600 hover:bg-gray-100 transition duration-300">
+                            <svg class="w-6 h-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" />
+                            </svg>
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Shopping Cart Sidebar/Modal -->
+    <div id="cart-sidebar" class="fixed top-0 right-0 w-full sm:w-96 h-full bg-white shadow-2xl z-50 transform translate-x-full transition-transform duration-300 ease-in-out">
+        <div class="p-6 h-full flex flex-col">
+            <div class="flex items-center justify-between pb-4 border-b border-gray-200">
+                <h3 class="text-xl font-semibold">Your Cart</h3>
+                <button id="close-cart-button" class="text-gray-400 hover:text-gray-600 transition duration-300">
+                    <svg class="w-6 h-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" />
+                    </svg>
+                </button>
+            </div>
+
+            <!-- Cart Items List -->
+            <div id="cart-items-container" class="sidebar-items flex-grow overflow-y-auto pt-4 space-y-4">
+                <p id="empty-cart-message" class="text-center text-gray-500 hidden">Your cart is empty.</p>
+            </div>
+
+            <!-- Cart Summary -->
+            <div class="pt-4 border-t border-gray-200">
+                <div class="flex items-center justify-between font-bold text-lg mb-4">
+                    <span>Total:</span>
+                    <span id="cart-total-price">$0.00</span>
+                </div>
+                <button id="clear-cart-button" class="w-full bg-gray-600 text-white font-semibold py-3 rounded-full shadow-lg hover:bg-gray-700 transition duration-300 mb-2">
+                    Clear Cart
+                </button>
+                <button class="w-full bg-gray-900 text-white font-semibold py-3 rounded-full shadow-lg hover:bg-gray-700 transition duration-300">
+                    Checkout
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Wishlist Sidebar/Modal -->
+    <div id="wishlist-sidebar" class="fixed top-0 right-0 w-full sm:w-96 h-full bg-white shadow-2xl z-50 transform translate-x-full transition-transform duration-300 ease-in-out">
+        <div class="p-6 h-full flex flex-col">
+            <div class="flex items-center justify-between pb-4 border-b border-gray-200">
+                <h3 class="text-xl font-semibold">Your Wishlist</h3>
+                <button id="close-wishlist-button" class="text-gray-400 hover:text-gray-600 transition duration-300">
+                    <svg class="w-6 h-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" />
+                    </svg>
+                </button>
+            </div>
+
+            <!-- Wishlist Items List -->
+            <div id="wishlist-items-container" class="sidebar-items flex-grow overflow-y-auto pt-4 space-y-4">
+                <p id="empty-wishlist-message" class="text-center text-gray-500 hidden">Your wishlist is empty.</p>
+            </div>
+
+            <!-- Wishlist Summary -->
+            <div class="pt-4 border-t border-gray-200">
+                <button id="add-all-to-cart-button" class="w-full bg-gray-900 text-white font-semibold py-3 rounded-full shadow-lg hover:bg-gray-700 transition duration-300 mb-2">
+                    Add all to Cart
+                </button>
+                <button id="clear-wishlist-button" class="w-full bg-gray-600 text-white font-semibold py-3 rounded-full shadow-lg hover:bg-gray-700 transition duration-300">
+                    Clear Wishlist
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Backdrop for the sidebars and modals -->
+    <div id="sidebar-backdrop" class="fixed inset-0 bg-black opacity-0 pointer-events-none transition-opacity duration-300 z-40"></div>
+    <div id="modal-backdrop" class="fixed inset-0 bg-black opacity-0 pointer-events-none transition-opacity duration-300 z-40"></div>
+
+
+    <!-- Footer -->
+    <footer class="bg-gray-900 text-white py-12">
+        <div class="container mx-auto px-4 text-center">
+            <div class="flex flex-col md:flex-row justify-center items-center mb-6 space-y-4 md:space-y-0 md:space-x-8">
+                <a href="#" class="hover:text-gray-300 transition duration-300">FAQ</a>
+                <a href="#" class="hover:text-gray-300 transition duration-300">Shipping & Returns</a>
+                <a href="#" class="hover:text-gray-300 transition duration-300">Privacy Policy</a>
+                <a href="#" class="hover:text-gray-300 transition duration-300">Contact Us</a>
+            </div>
+            <p class="text-sm text-gray-400">&copy; 2024 Zwap Zone. All Rights Reserved.</p>
+        </div>
+    </footer>
+
+    <!-- JavaScript -->
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            // Updated products data with categories
+            const products = [
+                // Men's Products
+                { id: 1, name: "Minimalist Black Tee", price: 29.99, image: "https://img.freepik.com/premium-photo/black-shirt-with-white-logo-it_1297958-4604.jpg", category: ['new-arrivals', 'men'], description: "A classic black t-shirt made from 100% organic cotton. A timeless piece for any wardrobe." },
+                { id: 2, name: "Classic Denim Jacket", price: 89.50, image: "https://tse2.mm.bing.net/th/id/OIP.O30AxkBEF41StCT60Y91cwAAAA?cb=thfc1ucfimg=1&rs=1&pid=ImgDetMain&o=7&rm=3", category: ['men'], description: "The essential denim jacket for a vintage-inspired look. Perfect for layering." },
+                { id: 3, name: "Men's Slim-Fit Jeans", price: 65.00, image: "https://i5.walmartimages.com/asr/25b68e8b-223f-422f-a46a-f70ddef56613.d0e3dfcf58f11527ea8d03f1c9e31663.jpeg?odnWidth=612&odnHeight=612&odnBg=ffffff", category: ['men'], description: "Versatile slim-fit jeans designed for comfort and style. A wardrobe staple." },
+                { id: 4, name: "Cotton Crewneck Sweater", price: 65.00, image: "https://i5.walmartimages.com/seo/Iceglad-Men-s-Crewneck-Sweater-Soft-Cotton-Rib-Knit-Casual-Long-Sleeve-Classic-Pullover-Sweater_0e476bfd-d59d-491a-94f7-4613cad2d2ef.53a16387caa3354b39df024e736179c2.jpeg?odnHeight=612&odnWidth=612&odnBg=FFFFFF", category: ['new-arrivals', 'men'], description: "A cozy crewneck sweater made from a soft cotton blend. Ideal for cooler weather." },
+                { id: 18, name: "Men's Classic Blazer", price: 120.00, image: "https://ae01.alicdn.com/kf/HTB1CL5bGKuSBuNjy1Xcq6AYjFXak/TFETTERS-Autumn-Casual-2018-Men-Casual-Blazer-Men-Suit-Blazer-Slim-Fit-Korean-Blazer-Plus-Size.jpg", category: ['men'], description: "A structured, versatile blazer perfect for both formal and smart-casual occasions. Made from a durable wool blend." },
+                { id: 19, name: "Casual Linen Shirt", price: 55.00, image: "https://i5.walmartimages.com/seo/HAOTAGS-Mens-Button-Down-Shirts-Solid-Color-Turndown-Collar-Short-Sleeve-Shirts-for-Summer-Navy-Size-4XL_266079e0-772a-4b01-aabc-da4ba3ca3293.7d52d0a9359b59298a2c0e11d79b1d53.jpeg", category: ['new-arrivals', 'men'], description: "A lightweight, breathable linen shirt for ultimate comfort in warmer weather. Available in various earthy tones." },
+                { id: 20, name: "Urban Cargo Shorts", price: 45.00, image: "https://i5.walmartimages.com/seo/Herrnalise-Men-s-Tactical-ShortsCargo-pants-for-men-Solid-Zipper-Button-closure-Cargo-Shorts-Pocket-Drawstring-Elastic-Waist-beach-shorts_fae2b96f-a92a-48d4-99ae-08c790704ffe.2054658bcccd5fbccb6e8cdf2597b244.jpeg", category: ['men'], description: "Practical and stylish cargo shorts with multiple pockets. Ideal for everyday wear and adventure." },
+                
+                // Women's Products
+                { id: 5, name: "Essential White Shirt", price: 40.00, image: "https://tse3.mm.bing.net/th/id/OIP.Mn7HgEuK-oUtgqf1b1WjMAHaJo?cb=thfc1ucfimg=1&w=1400&h=1820&rs=1&pid=ImgDetMain&o=7&rm=3", category: ['women'], description: "A crisp white button-down shirt that is a staple for any formal or casual look." },
+                { id: 6, name: "High-Waist Trousers", price: 55.00, image: "https://cdn.whatsonthestar.com/uploads/20210127105818.png", category: ['women'], description: "Tailored trousers with a high-waist fit for a modern and sophisticated silhouette." },
+                { id: 7, name: "Elegant Summer Dress", price: 75.00, image: "https://thumbor.modalova.fr/unsafe/aHR0cHM6Ly9pbWFnZXMyLnByb2R1Y3RzZXJ2ZS5jb20vP3c9MTAwMCZoPTEwMDAmYmc9d2hpdGUmdHJpbT01JnQ9bGV0dGVyYm94JnVybD1zc2wlM0FpbWcubHR3ZWJzdGF0aWMuY29tJTJGaW1hZ2VzM19waSUyRjIwMjElMkYwNCUyRjI1JTJGMTYxOTMyNDU4OTgyZTQ3N2QzY2MyZWVmMzRjMTU0ZDZmZmIwNGJlMzQ1LmpwZyZmZWVkSWQ9MzUxMDMmaz1mYjhmMjgxMGEyNWE2MmUyMzdlNjdlMWM2YzdiODI5Mjg1ZTJjMmUx_/robe-dos-nu-fleurie-avec-dentelle-29387719317-Modalova.jpg", category: ['new-arrivals', 'women'], description: "Light and airy summer dress with a delicate floral print. A must-have for sunny days." },
+                { id: 8, name: "Floral Maxi Dress", price: 85.00, image: "https://i.pinimg.com/736x/ea/5e/b7/ea5eb7e7c2f22f233daeaeebda40c3c4.jpg", category: ['women'], description: "A beautiful maxi dress with a flowy fit, perfect for special occasions or a relaxed evening." },
+                { id: 15, name: "Silk Slip Dress", price: 110.00, image: "https://i.etsystatic.com/18771955/r/il/6aa8ea/3083359941/il_500x500.3083359941_2two.jpg", category: ['women'], description: "A luxurious and elegant silk slip dress, perfect for evening events or a night out." },
+                { id: 16, name: "Effortless Linen Midi Dress", price: 70.00, image: "https://www.shoplovestitch.com/cdn/shop/files/rushstylescropped_0011_10_800x.jpg?v=1700708541", category: ['new-arrivals', 'women'], description: "A comfortable and breathable linen midi dress for a relaxed and chic daytime look." },
+                { id: 17, name: "Chic Cocktail Dress", price: 95.00, image: "https://th.bing.com/th/id/R.1d32bbbcef50f2f614b34bead69611a8?rik=Ej0l6iufJ0Q6%2bw&riu=http%3a%2f%2fwww.dhresource.com%2f0x0s%2ff2-albu-g4-M01-96-73-rBVaEFfCudGAI8WrAAFFDLaAVJQ378.jpg%2fsleeveless-short-sequin-short-cocktail-dresses.jpg&ehk=1lfGULRGL2RXAKlXXYJT2OgOjmbMUAAoAAyI8WRxto0%3d&risl=&pid=ImgRaw&r=0", category: ['women'], description: "A stylish and modern cocktail dress with a unique silhouette, ideal for any party." },
+
+                // Kids' Products
+                { id: 9, name: "Unicorn T-Shirt", price: 22.00, image: "https://rlv.zcache.com/unicorn_5th_birthday_t_shirt-ra3891e32b7cb44cca71d4fb5a878a346_65l98_510.jpg", category: ['new-arrivals', 'kids'], description: "A fun and colorful t-shirt featuring a magical unicorn design. Made from soft, breathable cotton." },
+                { id: 10, name: "Dinosaur Hoodie", price: 38.00, image: "https://cdn.fcglcdn.com/brainbees/images/products/583x720/20352157a.webp", category: ['kids'], description: "A comfy hoodie with a cool dinosaur graphic. Perfect for adventurous kids." },
+                { id: 11, name: "Galaxy Leggings", price: 25.00, image: "https://i.etsystatic.com/17314072/r/il/d9d7f3/2676680745/il_1588xN.2676680745_j2jv.jpg", category: ['kids'], description: "Stretchable and vibrant leggings with a galaxy print. Ideal for play and comfort." },
+                { id: 12, name: "Twirly Princess Dress", price: 45.00, image: "https://down-ph.img.susercontent.com/file/2d8ee1961c3a7cb0376033e0ae61f0c8", category: ['new-arrivals', 'kids'], description: "A magical and playful pink dress with a full skirt, perfect for twirling." },
+                { id: 13, name: "Starry Night Tulle Skirt", price: 32.00, image: "https://i5.walmartimages.com/seo/TAIAOJING-Women-s-Fairy-Tulle-SKIRT-Starry-Sky-Gradient-Color-Mesh-Skirt-High-Waist-A-Line-Pleated-Skirt-Sequin-Skirt_e657736d-9ec8-4c53-8210-c840aa7ab5c7.1a1fe08966141bbe81577909e1002a30.jpeg", category: ['kids'], description: "A whimsical dark blue tulle skirt with shimmering star details." },
+                { id: 14, name: "Striped Jumpsuit", price: 35.00, image: "https://ae01.alicdn.com/kf/HTB1mb9kaITxK1Rjy0Fgq6yovpXaP/SHEIN-Black-Vertical-Striped-Wide-Leg-Casual-Jumpsuit-Children-2019-Spring-Fashion-Half-Sleeve-Girls-Jumpsuit.jpg_640x640.jpg", category: ['new-arrivals', 'kids'], description: "A comfortable and stylish jumpsuit with a simple striped pattern for everyday adventures." },
+            ];
+
+            // Product Containers and Sections
+            const newArrivalsContainer = document.getElementById('new-arrivals-container');
+            const menContainer = document.getElementById('men-container');
+            const womenContainer = document.getElementById('women-container');
+            const kidsContainer = document.getElementById('kids-container');
+            const productSections = document.querySelectorAll('.product-section');
+            const productDetailModal = document.getElementById('product-modal');
+            const modalBackdrop = document.getElementById('modal-backdrop');
+
+            // Sidebar and UI Elements
+            const cartButton = document.getElementById('cart-button');
+            const wishlistButton = document.getElementById('wishlist-button');
+            const cartSidebar = document.getElementById('cart-sidebar');
+            const wishlistSidebar = document.getElementById('wishlist-sidebar');
+            const closeCartButton = document.getElementById('close-cart-button');
+            const closeWishlistButton = document.getElementById('close-wishlist-button');
+            const clearCartButton = document.getElementById('clear-cart-button');
+            const clearWishlistButton = document.getElementById('clear-wishlist-button');
+            const sidebarBackdrop = document.getElementById('sidebar-backdrop');
+            const cartItemsContainer = document.getElementById('cart-items-container');
+            const wishlistItemsContainer = document.getElementById('wishlist-items-container');
+            const cartCountSpan = document.getElementById('cart-count');
+            const wishlistCountSpan = document.getElementById('wishlist-count');
+            const cartTotalPriceSpan = document.getElementById('cart-total-price');
+            const emptyCartMessage = document.getElementById('empty-cart-message');
+            const emptyWishlistMessage = document.getElementById('empty-wishlist-message');
+            const navLinks = document.querySelectorAll('.nav-link');
+            
+            // Modal Elements
+            const modalProductImage = document.getElementById('modal-product-image');
+            const modalProductName = document.getElementById('modal-product-name');
+            const modalProductPrice = document.getElementById('modal-product-price');
+            const modalProductDescription = document.getElementById('modal-product-description');
+            const sizeOptionsContainer = document.getElementById('size-options-container');
+            const modalAddToCartBtn = document.getElementById('modal-add-to-cart-btn');
+            const modalAddToWishlistBtn = document.getElementById('modal-add-to-wishlist-btn');
+            const closeModalBtn = document.getElementById('close-modal-btn');
+            
+            let cart = JSON.parse(localStorage.getItem('cart')) || [];
+            let wishlist = JSON.parse(localStorage.getItem('wishlist')) || [];
+            let currentProductId = null;
+            let selectedSize = null;
+            const availableSizes = ['XS', 'S', 'M', 'L', 'XL'];
+
+            // --- Product Rendering and Event Handling ---
+            
+            function renderProducts(container, category) {
+                container.innerHTML = '';
+                const filteredProducts = products.filter(p => p.category.includes(category));
+                
+                filteredProducts.forEach(product => {
+                    const productCard = document.createElement('div');
+                    productCard.className = 'bg-white rounded-xl shadow-md overflow-hidden transform transition duration-300 hover:scale-105 cursor-pointer';
+                    productCard.dataset.id = product.id;
+                    productCard.innerHTML = `
+                        <img src="${product.image}" alt="${product.name}" class="w-full h-64 object-cover">
+                        <div class="p-6">
+                            <h3 class="text-lg font-semibold text-gray-900">${product.name}</h3>
+                            <p class="text-gray-600 mt-1">$${product.price.toFixed(2)}</p>
+                            <div class="flex items-center space-x-2 mt-4">
+                                <!-- Quick Add to Cart Button -->
+                                <button data-id="${product.id}" class="add-to-cart-btn flex-1 bg-gray-900 text-white font-medium py-2 rounded-full hover:bg-gray-700 transition duration-300">
+                                    <svg class="w-5 h-5 inline-block mr-1 -mt-1" fill="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                                        <path d="M16 11V7a4 4 0 00-8 0v4M5 9h14l1 12H4L5 9z" />
+                                    </svg>
+                                    Add to Cart
+                                </button>
+                                <button data-id="${product.id}" class="add-to-wishlist-btn p-2 rounded-full border border-gray-300 text-gray-600 hover:bg-gray-100 transition duration-300">
+                                    <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                                        <path d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5a5.5 5.5 0 015.5-5.5c1.74 0 3.41.81 4.5 2.09A5.5 5.5 0 0116.5 3c3.03 0 5.5 2.47 5.5 5.5 0 3.78-3.4 6.86-8.55 11.54L12 21.35z"/>
+                                    </svg>
+                                </button>
+                            </div>
+                        </div>
+                    `;
+                    container.appendChild(productCard);
+                });
+                attachProductEventListeners();
+            }
+
+            function attachProductEventListeners() {
+                // Attach listeners to open the modal
+                const productCards = document.querySelectorAll('.product-section [data-id]');
+                productCards.forEach(card => {
+                    card.addEventListener('click', (e) => {
+                        // Prevent opening modal when clicking wishlist or cart buttons inside the card
+                        if (!e.target.closest('.add-to-wishlist-btn') && !e.target.closest('.add-to-cart-btn')) {
+                            const productId = card.dataset.id;
+                            showProductDetailModal(productId);
+                        }
+                    });
+                });
+                
+                // Attach listeners for Quick Add to Cart buttons
+                const addToCartButtons = document.querySelectorAll('.add-to-cart-btn');
+                addToCartButtons.forEach(button => {
+                    button.addEventListener('click', (e) => {
+                        const productId = e.target.closest('button').dataset.id;
+                        // For quick add, use a default quantity of 1 and size (M)
+                        addToCart(productId, 1, 'M');
+                    });
+                });
+                
+                // Attach listeners for ADD to wishlist buttons
+                const addToWishlistButtons = document.querySelectorAll('.add-to-wishlist-btn');
+                addToWishlistButtons.forEach(button => {
+                    button.addEventListener('click', (e) => {
+                        const productId = e.target.closest('button').dataset.id;
+                        addToWishlist(productId);
+                    });
+                });
+            }
+
+            // --- Product Detail Modal Logic ---
+            
+            function showProductDetailModal(productId) {
+                const product = products.find(p => p.id === parseInt(productId));
+                if (!product) return;
+
+                currentProductId = productId;
+                
+                modalProductImage.src = product.image;
+                modalProductName.textContent = product.name;
+                modalProductPrice.textContent = `$${product.price.toFixed(2)}`;
+                modalProductDescription.textContent = product.description;
+
+                // Render vertical size selection buttons
+                sizeOptionsContainer.innerHTML = '';
+                availableSizes.forEach(size => {
+                    const button = document.createElement('button');
+                    button.textContent = size;
+                    button.className = 'w-10 h-10 rounded-full border border-gray-300 flex items-center justify-center font-medium transition duration-300';
+                    button.dataset.size = size;
+                    sizeOptionsContainer.appendChild(button);
+                });
+                
+                // Set initial selected size and add event listeners
+                const sizeButtons = sizeOptionsContainer.querySelectorAll('button');
+                selectedSize = 'S';
+                sizeButtons.forEach(btn => {
+                    btn.classList.remove('bg-gray-900', 'text-white');
+                    if (btn.dataset.size === selectedSize) {
+                        btn.classList.add('bg-gray-900', 'text-white');
+                    }
+                    btn.addEventListener('click', () => {
+                        selectedSize = btn.dataset.size;
+                        sizeButtons.forEach(b => b.classList.remove('bg-gray-900', 'text-white'));
+                        btn.classList.add('bg-gray-900', 'text-white');
+                    });
+                });
+                
+                productDetailModal.classList.remove('hidden', 'opacity-0');
+                productDetailModal.classList.add('opacity-100');
+                modalBackdrop.classList.remove('pointer-events-none', 'opacity-0');
+                modalBackdrop.classList.add('opacity-50');
+            }
+
+            function hideProductDetailModal() {
+                productDetailModal.classList.remove('opacity-100');
+                productDetailModal.classList.add('opacity-0');
+                modalBackdrop.classList.remove('opacity-50');
+                modalBackdrop.classList.add('pointer-events-none', 'opacity-0');
+                setTimeout(() => {
+                    productDetailModal.classList.add('hidden');
+                }, 300); // Wait for transition to finish
+            }
+
+
+            // --- Cart Logic ---
+
+            function updateCart() {
+                localStorage.setItem('cart', JSON.stringify(cart));
+                renderCartItems();
+                updateCartCount();
+                updateCartTotal();
+            }
+            
+            function renderCartItems() {
+                cartItemsContainer.innerHTML = '';
+                if (cart.length === 0) {
+                    emptyCartMessage.classList.remove('hidden');
+                } else {
+                    emptyCartMessage.classList.add('hidden');
+                    cart.forEach(item => {
+                        const cartItem = document.createElement('div');
+                        cartItem.className = 'flex items-center justify-between p-4 bg-gray-100 rounded-xl';
+                        cartItem.innerHTML = `
+                            <div class="flex items-center space-x-4">
+                                <img src="${item.image}" alt="${item.name}" class="w-16 h-16 object-cover rounded-md">
+                                <div>
+                                    <h4 class="font-medium text-sm">${item.name} (${item.size})</h4>
+                                    <p class="text-gray-500 text-xs">$${item.price.toFixed(2)} x ${item.quantity}</p>
+                                </div>
+                            </div>
+                            <div class="flex items-center space-x-2">
+                                <button data-id="${item.id}" class="remove-from-cart-btn text-gray-500 hover:text-red-500 transition-colors duration-300">
+                                    <svg class="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16" />
+                                    </svg>
+                                </button>
+                            </div>
+                        `;
+                        cartItemsContainer.appendChild(cartItem);
+                    });
+                }
+                attachCartEventListeners();
+            }
+            
+            function attachCartEventListeners() {
+                const removeFromCartButtons = document.querySelectorAll('.remove-from-cart-btn');
+                removeFromCartButtons.forEach(button => {
+                    button.addEventListener('click', (e) => {
+                        const productId = e.target.closest('button').dataset.id;
+                        removeFromCart(productId);
+                    });
+                });
+            }
+
+            function updateCartTotal() {
+                const total = cart.reduce((sum, item) => sum + (item.price * item.quantity), 0);
+                cartTotalPriceSpan.textContent = `$${total.toFixed(2)}`;
+            }
+
+            function updateCartCount() {
+                const totalItems = cart.reduce((sum, item) => sum + item.quantity, 0);
+                cartCountSpan.textContent = totalItems;
+            }
+
+            function addToCart(productId, quantity = 1, size = 'N/A') {
+                const product = products.find(p => p.id === parseInt(productId));
+                if (!product) return;
+
+                const existingItem = cart.find(item => item.id === product.id && item.size === size);
+                if (existingItem) {
+                    existingItem.quantity += quantity;
+                } else {
+                    cart.push({ ...product, quantity: quantity, size: size });
+                }
+                updateCart();
+            }
+
+            function removeFromCart(productId) {
+                cart = cart.filter(item => item.id !== parseInt(productId));
+                updateCart();
+            }
+
+            function clearCart() {
+                cart = [];
+                updateCart();
+            }
+            
+            // --- Wishlist Logic ---
+
+            function updateWishlist() {
+                localStorage.setItem('wishlist', JSON.stringify(wishlist));
+                renderWishlistItems();
+                updateWishlistCount();
+            }
+
+            function renderWishlistItems() {
+                wishlistItemsContainer.innerHTML = '';
+                if (wishlist.length === 0) {
+                    emptyWishlistMessage.classList.remove('hidden');
+                } else {
+                    emptyWishlistMessage.classList.add('hidden');
+                    wishlist.forEach(item => {
+                        const wishlistItem = document.createElement('div');
+                        wishlistItem.className = 'flex items-center justify-between p-4 bg-gray-100 rounded-xl';
+                        wishlistItem.innerHTML = `
+                            <div class="flex items-center space-x-4">
+                                <img src="${item.image}" alt="${item.name}" class="w-16 h-16 object-cover rounded-md">
+                                <div>
+                                    <h4 class="font-medium text-sm">${item.name}</h4>
+                                    <p class="text-gray-500 text-xs">$${item.price.toFixed(2)}</p>
+                                </div>
+                            </div>
+                            <div class="flex items-center space-x-2">
+                                <button data-id="${item.id}" class="remove-from-wishlist-btn text-gray-500 hover:text-red-500 transition-colors duration-300">
+                                    <svg class="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16" />
+                                    </svg>
+                                </button>
+                            </div>
+                        `;
+                        wishlistItemsContainer.appendChild(wishlistItem);
+                    });
+                }
+                attachWishlistEventListeners();
+            }
+            
+            function attachWishlistEventListeners() {
+                const removeFromWishlistButtons = document.querySelectorAll('.remove-from-wishlist-btn');
+                removeFromWishlistButtons.forEach(button => {
+                    button.addEventListener('click', (e) => {
+                        const productId = e.target.closest('button').dataset.id;
+                        removeFromWishlist(productId);
+                    });
+                });
+            }
+
+            function updateWishlistCount() {
+                wishlistCountSpan.textContent = wishlist.length;
+            }
+
+            function addToWishlist(productId) {
+                const product = products.find(p => p.id === parseInt(productId));
+                if (product && !wishlist.find(item => item.id === product.id)) {
+                    wishlist.push(product);
+                    updateWishlist();
+                }
+            }
+            
+            function removeFromWishlist(productId) {
+                wishlist = wishlist.filter(item => item.id !== parseInt(productId));
+                updateWishlist();
+            }
+
+            function clearWishlist() {
+                wishlist = [];
+                updateWishlist();
+            }
+            
+            // --- Sidebar and UI Interaction ---
+            function showSidebar(sidebar) {
+                sidebar.classList.remove('translate-x-full');
+                sidebarBackdrop.classList.remove('pointer-events-none', 'opacity-0');
+                sidebarBackdrop.classList.add('opacity-50');
+            }
+
+            function hideSidebar(sidebar) {
+                sidebar.classList.add('translate-x-full');
+                sidebarBackdrop.classList.remove('opacity-50');
+                sidebarBackdrop.classList.add('pointer-events-none', 'opacity-0');
+            }
+
+            function showProductsByCategory(category) {
+                // Hide all product sections
+                productSections.forEach(section => {
+                    section.classList.add('hidden');
+                });
+                
+                // Show the selected product section(s)
+                if (category && category !== 'none') {
+                    const sectionToShow = document.getElementById(category + '-section');
+                    if (sectionToShow) {
+                        sectionToShow.classList.remove('hidden');
+                    }
+                }
+            }
+
+            // --- Main Event Listeners ---
+            cartButton.addEventListener('click', () => showSidebar(cartSidebar));
+            wishlistButton.addEventListener('click', () => showSidebar(wishlistSidebar));
+            closeCartButton.addEventListener('click', () => hideSidebar(cartSidebar));
+            closeWishlistButton.addEventListener('click', () => hideSidebar(wishlistSidebar));
+            clearCartButton.addEventListener('click', clearCart);
+            clearWishlistButton.addEventListener('click', clearWishlist);
+
+            modalAddToCartBtn.addEventListener('click', () => {
+                addToCart(currentProductId, 1, selectedSize);
+                hideProductDetailModal();
+            });
+
+            modalAddToWishlistBtn.addEventListener('click', () => {
+                addToWishlist(currentProductId);
+                hideProductDetailModal();
+            });
+
+            closeModalBtn.addEventListener('click', hideProductDetailModal);
+            modalBackdrop.addEventListener('click', hideProductDetailModal);
+
+            sidebarBackdrop.addEventListener('click', () => {
+                hideSidebar(cartSidebar);
+                hideSidebar(wishlistSidebar);
+            });
+
+            // --- Navigation Link Logic ---
+            navLinks.forEach(link => {
+                link.addEventListener('click', (e) => {
+                    e.preventDefault();
+                    const targetId = e.target.getAttribute('href').substring(1);
+                    const category = e.target.dataset.category;
+                    
+                    if (category && category !== 'none') {
+                        showProductsByCategory(category);
+                    } else {
+                        // For static sections like 'About'
+                        productSections.forEach(section => section.classList.add('hidden'));
+                        document.getElementById(targetId).classList.remove('hidden');
+                    }
+                    
+                    const targetSection = document.getElementById(targetId);
+                    if (targetSection) {
+                        targetSection.scrollIntoView({ behavior: 'smooth' });
+                    }
+                });
+            });
+
+            // Initial render
+            renderProducts(newArrivalsContainer, 'new-arrivals');
+            renderProducts(menContainer, 'men');
+            renderProducts(womenContainer, 'women');
+            renderProducts(kidsContainer, 'kids');
+            updateCart();
+            updateWishlist();
+        });
+    </script>
+
+</body>
+</html>
