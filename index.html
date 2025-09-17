@@ -151,7 +151,7 @@
 
                     <div class="flex space-x-2 mt-4">
                         <button id="modal-add-to-cart-btn" class="flex-1 bg-gray-900 text-white font-medium py-3 px-6 rounded-full hover:bg-gray-700 transition duration-300">
-                            Add to Cart
+                            Add to Cart 
                         </button>
                         <button id="modal-add-to-wishlist-btn" class="flex-1 bg-gray-600 text-white font-medium py-3 px-6 rounded-full hover:bg-gray-700 transition duration-300">
                             Add to Wishlist
@@ -411,7 +411,7 @@ const formattedPrice = new Intl.NumberFormat('en-IN', {
                 
                 modalProductImage.src = product.image;
                 modalProductName.textContent = product.name;
-                modalProductPrice.textContent = `$${product.price.toFixed(2)}`;
+                modalProductPrice.textContent = `₹${product.price.toFixed(2)}`;
                 modalProductDescription.textContent = product.description;
 
                 // Render vertical size selection buttons
@@ -471,7 +471,7 @@ const formattedPrice = new Intl.NumberFormat('en-IN', {
                     emptyCartMessage.classList.remove('hidden');
                 } else {
                     emptyCartMessage.classList.add('hidden');
-                    cart.forEach(item => {
+                    cart.forEach(item => { 
                         const cartItem = document.createElement('div');
                         cartItem.className = 'flex items-center justify-between p-4 bg-gray-100 rounded-xl';
                         cartItem.innerHTML = `
@@ -479,7 +479,7 @@ const formattedPrice = new Intl.NumberFormat('en-IN', {
                                 <img src="${item.image}" alt="${item.name}" class="w-16 h-16 object-cover rounded-md">
                                 <div>
                                     <h4 class="font-medium text-sm">${item.name} (${item.size})</h4>
-                                    <p class="text-gray-500 text-xs">$${item.price.toFixed(2)} x ${item.quantity}</p>
+                                    <p class="text-gray-500 text-xs">₹${item.price.toFixed(2)} x ${item.quantity}</p>
                                 </div>
                             </div>
                             <div class="flex items-center space-x-2">
@@ -508,14 +508,14 @@ const formattedPrice = new Intl.NumberFormat('en-IN', {
 
             function updateCartTotal() {
                 const total = cart.reduce((sum, item) => sum + (item.price * item.quantity), 0);
-                cartTotalPriceSpan.textContent = `$${total.toFixed(2)}`;
+                cartTotalPriceSpan.textContent = `₹${total.toFixed(2)}`;
             }
 
             function updateCartCount() {
                 const totalItems = cart.reduce((sum, item) => sum + item.quantity, 0);
                 cartCountSpan.textContent = totalItems;
             }
-
+            
             function addToCart(productId, quantity = 1, size = 'N/A') {
                 const product = products.find(p => p.id === parseInt(productId));
                 if (!product) return;
@@ -528,7 +528,7 @@ const formattedPrice = new Intl.NumberFormat('en-IN', {
                 }
                 updateCart();
             }
-
+            
             function removeFromCart(productId) {
                 cart = cart.filter(item => item.id !== parseInt(productId));
                 updateCart();
@@ -561,7 +561,7 @@ const formattedPrice = new Intl.NumberFormat('en-IN', {
                                 <img src="${item.image}" alt="${item.name}" class="w-16 h-16 object-cover rounded-md">
                                 <div>
                                     <h4 class="font-medium text-sm">${item.name}</h4>
-                                    <p class="text-gray-500 text-xs">$${item.price.toFixed(2)}</p>
+                                    <p class="text-gray-500 text-xs">₹${item.price.toFixed(2)}</p>
                                 </div>
                             </div>
                             <div class="flex items-center space-x-2">
